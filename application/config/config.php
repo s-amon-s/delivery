@@ -19,7 +19,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 // http://amon/Web_Design/Web_Work/My%20Website
 // C:/wamp/www/Web_Design/Web_Work/My_Website/
-$config['base_url'] = 'localhost:1212/Codeigniter_JRK\delivery_tcdc';
+$config['base_url'] = 'localhost:1212/Codeigniter_JRK/delivery_tcdc';
 
 /*
 |--------------------------------------------------------------------------
