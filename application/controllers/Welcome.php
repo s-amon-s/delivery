@@ -9,6 +9,7 @@ class Welcome extends MY_CONTROLLER{
 		$this->middle = 'delivery_index'; // passing middle to function. change this for different views.
 	    $this->layout();
 	}
+
 	public function create_db(){
 	 $database_name = "delivery_tcdc";
 		if (!$this->dbutil->database_exists($database_name)){
@@ -25,6 +26,8 @@ class Welcome extends MY_CONTROLLER{
 			
 		echo(json_encode($response));
 	}
+
+	
 	public function delete_db(){
 	   $database_name = "delivery_tcdc";
 		if ($this->dbutil->database_exists($database_name)){

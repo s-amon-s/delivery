@@ -1,101 +1,39 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Delivery_Model extends CI_Model {
+class Delivery_Model extends CI_Model{
 
 	public function __construct(){
-	    // Call the CI_Model constructor
 	    parent::__construct();
-	    
+        $this->load->model('delivery_schema');
 	}
 
-	//Relationship One:Many (Corporate:Orders), One:Many (Order:Items)
-
-	public function create_Corporate_Table($corporateTable){
-		 $attributes = array('ENGINE' => 'InnoDB');//InnoDB or MyISAM, set here
-		 $Corporate_Model = array(
-	        'c_id' => array(
-	                'type' => 'INT',
-	                'constraint' => 5,
-	                'unsigned' => TRUE,
-	                'auto_increment' => TRUE,
-	        ),
-	        'c_name' => array(
-	                'type' => 'VARCHAR',
-	                'constraint' => '100',
-	                'unique' => TRUE,
-	        ),
-	        'c_address' => array(
-	                'type' => 'VARCHAR',
-	                'constraint' => '255',
-	                'unique' => TRUE,
-	        ),
-	        'c_status' => array(
-	                'type' =>'INT',
-	                'constraint' => 1,
-	                'unsigned' => TRUE,
-	                'default' => 1,
-	        ),
-	        'c_maxRent' => array(
-	                'type' => 'INT',
-	                'unsigned' => TRUE,
-	                'default' => 5,
-	        ),
-		);
-	
+	//Execute Create command for database and tables
+	private function execute($model,$pk,$table){
+		$attributes = array('ENGINE' => 'InnoDB');//InnoDB or MyISAM, set here
 		$this->db->query('use delivery_tcdc');
-		$this->dbforge->add_field($Corporate_Model);
-        $this->dbforge->add_key('c_id', TRUE);
-		$this->dbforge->create_table($corporateTable,TRUE,$attributes);
+		$this->dbforge->add_field($model);
+        $this->dbforge->add_key($pk, TRUE);
+		$this->dbforge->create_table($table,TRUE,$attributes);
+	}
+	
+	//Relationship One:Many (Corporate:Orders), One:Many (Order:Items)
+	public function create_Corporate_Table($corporateTable){
+		 		
+		$this->execute($this->delivery_schema->Corporate_Schema(),'c_id',$corporateTable);	
 	}
 	
 	public function create_Order_Table($orderTable){
-		$attributes = array('ENGINE' => 'InnoDB');//InnoDB or MyISAM, set here
-		$Order_Model = array(
-        'o_id' => array(
-                'type' => 'INT',
-                'constraint' => 5,
-                'unsigned' => TRUE,
-                'auto_increment' => TRUE
-        ),
-        'o_status' => array(
-                'type' => 'INT',
-                'constraint' => 1,
-                'default' => 1,
-        ),
-        'o_code' => array(
-                'type' =>'VARCHAR',
-                'constraint' => '100',
-                'default' => 'QwErTy0123456789',
-        ),
-        'o_count' => array(
-                'type' => 'INT',
-                'default' => 0,
-        ),
-        'o_return_date' => array(
-                'type' => 'Date',
-                'null' => TRUE,
-        ),
-        'o_deliver_date' => array(
-                'type' => 'Date',
-                'null' => TRUE,
-        ),
-        'o_description' => array(
-                'type' => 'VARCHAR',
-                'constraint' => '255',
-        ),
-    );
-		$this->db->query('use delivery_tcdc');
-		$this->dbforge->add_field($Order_Model);
-		$this->dbforge->add_key('o_id', TRUE);
-		$this->dbforge->create_table($orderTable,TRUE,$attributes);
+		$this->execute($this->delivery_schema->Order_Schema(),'o_id',$orderTable);	
+	
 	}
 
-	public function create_Item_Table($itemTable){
-		// global $Item_Model;
-		// global $attributes;
-		// $this->dbforge->add_field($Item_Model);
-		// $this->dbforge->create_table($itemTable,TRUE,$attributes);
+	public function create_Corporate_Order_Table($corelationTable){
+		$this->execute($this->delivery_schema->Corporate_Order_Schema(),'co_id',$corelationTable);		
+	}
+
+	public function create_Order_Items_Table($oirelationTable){
+		$this->execute($this->delivery_schema->Order_Items_Schema(),'oi_id',$oirelationTable);	
 	}
 	
 	public function delete_Corporate_Table($corporateTable){
@@ -152,18 +90,9 @@ public function update($username,$password){
 			}
 		}
 		 echo "Tables imported successfully";
-
-		
-		// if($query){
-		//     $row = $query->row();
-  //  			if($row){
-  //  				return $row;
-  //  			}
-  //  			return false;
-		// }else{
-		// 	return false;
-		// }
 	}
+
 }
+
 
 ?>
