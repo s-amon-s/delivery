@@ -3,8 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Delivery_Schema{
 
-	 public function Corporate_Schema(){
-	 	$Corporate_Model = array(
+	private $Corporate_Model = array(
 	        'c_id' => array(
 	                'type' => 'INT',
 	                'constraint' => 5,
@@ -34,13 +33,8 @@ class Delivery_Schema{
 	        ),
 		);
 
-	 	return $Corporate_Model;
-	 }
 
-
-	 public function Order_Schema(){
-
-		$Order_Model = array(
+	private $Order_Model = array(
         'o_id' => array(
                 'type' => 'INT',
                 'constraint' => 5,
@@ -65,7 +59,7 @@ class Delivery_Schema{
                 'type' => 'Date',
                 'null' => TRUE,
         ),
-        'o_deliver_date' => array(
+        'o_delivery_date' => array(
                 'type' => 'Date',
                 'null' => TRUE,
         ),
@@ -73,55 +67,42 @@ class Delivery_Schema{
                 'type' => 'VARCHAR',
                 'constraint' => '255',
         ),
+        'c_id' => array(
+                'type' => 'INT',
+                'default' => 0,
+        ),
     );
-		return $Order_Model;
-	 }
 
-
-	 public function Corporate_Order_Schema(){
-		 $Corporate_Order_Model = array(
-	        'co_id' => array(
-	                'type' => 'INT',
-	                'constraint' => 5,
-	                'unsigned' => TRUE,
-	                'auto_increment' => TRUE,
-	        ),
-	        'c_id' => array(
-	                'type' => 'INT',
-	                'unsigned' => TRUE,	                
-	        ),
-	        'o_id' => array(
-	        	    'type' => 'INT',
-	                'unsigned' => TRUE,	                
-	        ),
+    private $Order_Items_Model = array(
+	    'oi_id' => array(
+                'type' => 'INT',
+                'constraint' => 5,
+                'unsigned' => TRUE,
+                'auto_increment' => TRUE,
+        ),
+        'o_id' => array(
+                'type' => 'INT',
+                'unsigned' => TRUE,	                
+        ),
+        'bib_id' => array(
+                'type' => 'VARCHAR',
+             	'constraint' => '100',
+        ),
+   
 		);
-		
-		return $Corporate_Order_Model;
-	 }
 
-	 public function Order_Items_Schema(){
-	 	$Order_Items_Model = array(
-	        'oi_id' => array(
-	                'type' => 'INT',
-	                'constraint' => 5,
-	                'unsigned' => TRUE,
-	                'auto_increment' => TRUE,
-	        ),
-	        'o_id' => array(
-	                'type' => 'INT',
-	                'unsigned' => TRUE,	                
-	        ),
-	        'bib_id' => array(
-	                'type' => 'INT',
-	                'unsigned' => TRUE,	                
-	        ),
-	   
-		);
-		
-		return $Order_Items_Model;
 
-	 }
+		public function Corporate_Schema(){
+			return $this->Corporate_Model;
+		}
 
+		public function Order_Schema(){
+			return $this->Order_Model;
+		}
+
+		public function Order_Items_Schema(){
+			return $this->Order_Items_Model;
+		}
 }
 
 ?>

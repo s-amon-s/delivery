@@ -11,9 +11,8 @@ class Welcome extends MY_CONTROLLER{
 	}
 
 	public function create_db(){
-	 $database_name = "delivery_tcdc";
-		if (!$this->dbutil->database_exists($database_name)){
-			$this->dbforge->create_database($database_name,true);				
+		if(!$this->delivery_model->does_database_exist($this->database_name)){
+			$this->delivery_model->create_db($this->database_name);				
 		}
 
 		$response = array(
@@ -29,9 +28,9 @@ class Welcome extends MY_CONTROLLER{
 
 	
 	public function delete_db(){
-	   $database_name = "delivery_tcdc";
-		if ($this->dbutil->database_exists($database_name)){
-			$this->dbforge->drop_database($database_name);
+	   
+	   if($this->delivery_model->does_database_exist($this->database_name)){
+			$this->delivery_model->delete_db($this->database_name);				
 		}
 
 		$response = array(
@@ -61,15 +60,15 @@ class Welcome extends MY_CONTROLLER{
 	}
 
 
-public function delete_tbO(){
+	public function delete_tbO(){
 		$Order_Table_Name = "Orders";
 		$query = $this->delivery_model->delete_Order_Table($Order_Table_Name);
 		$response = array(
-				  				'status'=>"Order Table Doesn't Exists",
-				  				'logo'=> "glyphicon glyphicon-new-window",
-				  				'code' => 'Create Order Table',
-		  						'log' => 'Order table Deleted',
-		  						'url' => 'create_tbO'
+			'status'=>"Order Table Doesn't Exists",
+			'logo'=> "glyphicon glyphicon-new-window",
+			'code' => 'Create Order Table',
+			'log' => 'Order table Deleted',
+			'url' => 'create_tbO'
 				 );	
 			
 		echo(json_encode($response));
@@ -92,7 +91,7 @@ public function delete_tbO(){
 	}
 
 
-public function delete_tbC(){
+	public function delete_tbC(){
 		$Corporate_Table_Name = "Corporate";
 		$query = $this->delivery_model->delete_Corporate_Table($Corporate_Table_Name);
 		$response = array(
@@ -102,95 +101,98 @@ public function delete_tbC(){
 		  						'log' => 'Corporate Table Deleted',
 		  						'url' => 'create_tbC'
 				 );	
-			
 		echo(json_encode($response));
 	}
 
-public function select()
-{
+	public function create_oi_table(){
+		$OI_Table_Name = "orders_items";
+		$query = $this->delivery_model->create_Order_Items_Table($OI_Table_Name);
+	}
 
-	if ($this->input->post('ad')) {
-		$ad = $this->input->post('ad');
-		echo $ad;
-	}else{
+	public function insert_into_corporate_table(){
+		try{
 
-	
-try {
+			$data = array(
+				'c_name' => $this->input->post('c_name'),
+				'c_address'=>$this->input->post('c_address'),
+				'c_status' => $this->input->post('c_status'),
+				'c_maxRent' => $this->input->post('c_maxRent'),
+				);
+			
+			$query = $this->delivery_model->insert_into_corporate_table($data);
 
-
-$data = array(
-					'firstname' => $this->input->post('First_Name'),
-					'lastname'=>$this->input->post('Last_Name'),
-					'dob' => $this->input->post('DOB'),
-					'username' => $this->input->post('Username'),
-					'contact' => $this->input->post('Contact'),
-					'email' => $this->input->post('Email'),
-					'password' => $psw,
-					'address' => $ad
-		);
-
-	$this->load->model('login_detail');
-	$email = $this->input->post('Email');
-	$username = $this->input->post('Username');
-
-	$query = $this->login_detail->register($data);
-	
-		if($query=="1"){
-			echo "Successfully Registered!!";
-			$this->load->library('email');
-			$this->email->from('amon@geetaanjali.com', 'Amon');
-			$this->email->to($email); 
-			$this->email->bcc('muqtado3g@gmail.com'); 
-			$this->email->subject('Vasudev Kutumbakam');
-			$this->email->message('jrk');
-			$this->email->set_alt_message('Your username: '.$username.'\nYour Password: '.$psw);	
-			$this->email->send();
-		}else{
-				echo "Registration Failure!!";
+			if($query){
+				$response = array(
+				'log' => $this->input->post('c_name')."'s profile has been inserted into Corporate Table"
+				);	
+				
+			}else{
+				$response = array(
+				'log' => 'Error inserting '.$this->input->post('c_name')."'s profile",
+				);	
 			}
-} catch (Exception $e) {
-	echo "<script>console.log('Jai Radhekrishna! - error occured');</script>";
-}
 
+		}catch (Exception $e){
+			$response = array('log'=>'failed', 'error'=>$e->__toString());
+		}
+		echo(json_encode($response));
 	}
 	
-   }
+   
 
 
-public function update(){
+	public function insert_into_order_table(){
+		try{
+		$data = array(
+			'o_status' => $this->input->post('o_status'),
+			'o_code'=>$this->input->post('o_code'),
+			'o_count' => $this->input->post('o_count'),
+			'o_return_date' => $this->input->post('o_return_date'),
+			'o_delivery_date' => $this->input->post('o_delivery_date'),
+			'o_description' => $this->input->post('o_description'),
+			'c_id' => $this->input->post('c_id'),
+			);
+		
+		$query = $this->delivery_model->insert_into_order_table($data,$this->input->post('i_list'));
 
-	$response = array();
-	$array = array();
+		if($query){
+			$response = array(
+			'log' => $this->input->post('c_name')." just made an order"
+			);	
+			
+		}else{
+			$response = array(
+			'log' => 'Error making order for '.$this->input->post('c_name'),
+			);	
+		}
+
+	} catch (Exception $e) {
+		$response = array('log'=>'failed', 'error'=>$e->__toString());
+	}
+	echo(json_encode($response));
+
+	}
+
+public function get_corporates(){
 	try {
-			$usernamea = $this->input->post('username');
-		    $passworda = $this->input->post('password');
-			if($usernamea && $passworda){
-		  		$query = $this->login_detail->query($usernamea,$passworda);
-		  		if($query)
-  				{
-		  			$response = array(
-		  				'status'=>'ok',
-		  				'msg'=>'logged in success',
-		  				'data'=>$query,
-		  			);
-					
-					$array = array(
-						'logged_in' => true,
-						'user_data' => $query,
-					);
-					$this->session->set_userdata( $array );
-
-				}else{
-						$response = array(
-							'status'=>'failed',
-							'msg' => 'you account not found'
-						);
-				}
-			}
+		  	$query = $this->delivery_model->get_corporate();
+			$response = array(
+				'status'=>'ok',
+				'info'=>$query
+			);		  	
 		}catch (Exception $e){
-			$response = array('status'=>'failed', 'error'=>$e->__toString());
+			$response = array('status'=>'failed', 'info'=>$e->__toString());
 		}
 		echo json_encode($response);
+}
+
+public function execute_sql_file(){
+	$query = $this->delivery_model->execute_sql_file($this->input->post('file_name'));
+	if($query){
+		echo("Executed");	
+	}else{
+		echo("Error Executing");
 	}
+}
 
 }
