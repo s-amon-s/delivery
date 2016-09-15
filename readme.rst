@@ -36,13 +36,13 @@ Boon Mee Lab 2016
 ***********************************************
 Resources (Functions and Parameters Reference)
 ***********************************************
-//   $Canceled = 0;             Canceled
-//   $Waiting_Confirm = 1;      Submitted
-//   $Waiting_Ship = 2;         Confirmed 
-//   $Waiting_Delivery = 3;     Shipped 
-//   $Waiting_Return = 4;       Delivered
-//   $Completed = 5;            Returned
-//   $Waiting_Update = 6        Declined
+$Canceled = 0;             Canceled
+$Waiting_Confirm = 1;      Submitted
+$Waiting_Ship = 2;         Confirmed 
+$Waiting_Delivery = 3;     Shipped 
+$Waiting_Return = 4;       Delivered
+$Completed = 5;            Returned
+$Waiting_Update = 6        Declined
 
 - `does_table_exist`
 	Input: 
