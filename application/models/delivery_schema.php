@@ -3,8 +3,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Delivery_Schema{
 
+//  Order Status (o_status)__________
+    public $Canceled = 0;            //aka Canceled
+    public $Waiting_Confirm = 1;    // aka Submitted
+    public $Waiting_Ship = 2;      //  aka Confirmed 
+    public $Waiting_Delivery = 3; //   aka Shipped 
+    public $Waiting_Return = 4;  //    aka Delivered
+    public $Completed = 5;      //     aka Returned
+    public $Waiting_Update = 6;//      aka Declined
+//____________________________//
+    
 	private $Corporate_Model = array(
-	        'c_id' => array(
+	        'id' => array(
 	                'type' => 'INT',
 	                'constraint' => 5,
 	                'unsigned' => TRUE,
@@ -14,28 +24,44 @@ class Delivery_Schema{
 	                'type' => 'VARCHAR',
 	                'constraint' => '100',
 	                'unique' => TRUE,
+                    'default' => 'not mentioned',
 	        ),
+            'contact_person' => array(
+                    'type' => 'VARCHAR',
+                    'constraint' => '255',
+                    'default' => 'not mentioned',
+            ),
+            'c_phone' => array(
+                    'type' => 'VARCHAR',
+                    'constraint' => '18',
+                    'default' => 'not mentioned',
+            ),
 	        'c_address' => array(
 	                'type' => 'VARCHAR',
 	                'constraint' => '255',
 	                'unique' => TRUE,
+                    'default' => 'not mentioned',
 	        ),
 	        'c_status' => array(
 	                'type' =>'INT',
 	                'constraint' => 1,
 	                'unsigned' => TRUE,
-	                'default' => 1,
+	                'default' => 0,
 	        ),
 	        'c_maxRent' => array(
 	                'type' => 'INT',
 	                'unsigned' => TRUE,
-	                'default' =>	 5,
+	                'default' =>  5,
 	        ),
+            'c_maxDay' => array(
+                    'type' => 'INT',
+                    'unsigned' => TRUE,
+                    'default' =>  5,
+            ),
 		);
 
-
-	private $Order_Model = array(
-        'o_id' => array(
+    private $Order_Model = array(
+        'id' => array(
                 'type' => 'INT',
                 'constraint' => 5,
                 'unsigned' => TRUE,
@@ -55,15 +81,47 @@ class Delivery_Schema{
                 'type' => 'INT',
                 'default' => 0,
         ),
+        'o_cancle_date' => array(
+                'type' => 'Date',
+                'null' => TRUE,
+        ),
+        'o_submit_date' => array(
+                'type' => 'Date',
+                'null' => TRUE,
+        ),
+        'o_confirm_date' => array(
+                'type' => 'Date',
+                'null' => TRUE,
+        ),
+        'o_ship_date' => array(
+                'type' => 'Date',
+                'null' => TRUE,
+        ),
+        'o_deliver_date' => array(
+                'type' => 'Date',
+                'null' => TRUE,
+        ),
         'o_return_date' => array(
                 'type' => 'Date',
                 'null' => TRUE,
         ),
-        'o_delivery_date' => array(
+        'o_complete_date' => array(
+                'type' => 'Date',
+                'null' => TRUE,
+        ),
+        'o_decline_date' => array(
                 'type' => 'Date',
                 'null' => TRUE,
         ),
         'o_description' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+        ),
+        'staff_note' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+        ),
+        'user_note' => array(
                 'type' => 'VARCHAR',
                 'constraint' => '255',
         ),
@@ -74,7 +132,7 @@ class Delivery_Schema{
     );
 
     private $Order_Items_Model = array(
-	    'oi_id' => array(
+	    'id' => array(
                 'type' => 'INT',
                 'constraint' => 5,
                 'unsigned' => TRUE,
@@ -91,18 +149,17 @@ class Delivery_Schema{
    
 		);
 
+	public function Corporate_Schema(){
+		return $this->Corporate_Model;
+	}
 
-		public function Corporate_Schema(){
-			return $this->Corporate_Model;
-		}
+	public function Order_Schema(){
+		return $this->Order_Model;
+	}
 
-		public function Order_Schema(){
-			return $this->Order_Model;
-		}
-
-		public function Order_Items_Schema(){
-			return $this->Order_Items_Model;
-		}
+	public function Order_Items_Schema(){
+		return $this->Order_Items_Model;
+	}
 }
 
 ?>

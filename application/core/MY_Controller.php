@@ -8,6 +8,7 @@ class MY_Controller extends CI_Controller{
     $this->load->dbforge();
     $this->load->dbutil();
     $this->load->model('delivery_model');
+    // $this->faker = Faker\Factory::create();
   }
   
    //set the class variable.

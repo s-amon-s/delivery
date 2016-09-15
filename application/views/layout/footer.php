@@ -91,7 +91,7 @@ $("#seed_table").change(function(){
   //Check if the selected corporate can make order
   if(canOrder[$('#c_list').prop('selectedIndex')] == 1){
     
-    var final_url = 'http://' + '<?=base_url();?>' + 'index.php/Welcome/' + 'insert_into_order_table';
+    var final_url = 'http://' + '<?=base_url();?>' + 'index.php/Welcome/' + 'submit_order';
    
     var o_status = $('#o_status').val();
     var o_code = $('#o_code').val();
@@ -152,7 +152,7 @@ $("#seed_table").change(function(){
     //make sure the form is visible
     document.getElementById('order_form').style.display = "block";
     document.getElementById('corporate_form').style.display = "none";
-    var final_url = 'http://' + '<?=base_url();?>' + 'index.php/Welcome/' + 'get_corporates';
+    var final_url = 'http://' + '<?=base_url();?>' + 'index.php/Welcome/' + 'get_all_corporates';
     $.ajax({
       url: final_url,
       type: 'get',

@@ -47,7 +47,7 @@ class Welcome extends MY_CONTROLLER{
 
 	public function create_tbO(){
 		$Order_Table_Name = "Orders";
-		$query = $this->delivery_model->create_Order_Table($Order_Table_Name);
+		$query = $this->delivery_model->create_order_table($Order_Table_Name);
 		$response = array(
 				  				'status'=>"Order Table Exists",
 				  				'logo'=> "glyphicon glyphicon-trash",
@@ -62,7 +62,7 @@ class Welcome extends MY_CONTROLLER{
 
 	public function delete_tbO(){
 		$Order_Table_Name = "Orders";
-		$query = $this->delivery_model->delete_Order_Table($Order_Table_Name);
+		$query = $this->delivery_model->delete_table($Order_Table_Name);
 		$response = array(
 			'status'=>"Order Table Doesn't Exists",
 			'logo'=> "glyphicon glyphicon-new-window",
@@ -78,7 +78,7 @@ class Welcome extends MY_CONTROLLER{
 
 	public function create_tbC(){
 		$Corporate_Table_Name = "Corporate";
-		$query = $this->delivery_model->create_Corporate_Table($Corporate_Table_Name);
+		$query = $this->delivery_model->create_corporate_table($Corporate_Table_Name);
 		$response = array(
 				  				'status'=>"Corporate Table Exists",
 				  				'logo'=> "glyphicon glyphicon-trash",
@@ -93,7 +93,7 @@ class Welcome extends MY_CONTROLLER{
 
 	public function delete_tbC(){
 		$Corporate_Table_Name = "Corporate";
-		$query = $this->delivery_model->delete_Corporate_Table($Corporate_Table_Name);
+		$query = $this->delivery_model->delete_table($Corporate_Table_Name);
 		$response = array(
 				  				'status'=>"Corporate Table Doesn't Exists",
 				  				'logo'=> "glyphicon glyphicon-new-window",
@@ -106,7 +106,7 @@ class Welcome extends MY_CONTROLLER{
 
 	public function create_oi_table(){
 		$OI_Table_Name = "orders_items";
-		$query = $this->delivery_model->create_Order_Items_Table($OI_Table_Name);
+		$query = $this->delivery_model->create_order_items_table($OI_Table_Name);
 	}
 
 	public function insert_into_corporate_table(){
@@ -141,7 +141,7 @@ class Welcome extends MY_CONTROLLER{
    
 
 
-	public function insert_into_order_table(){
+	public function submit_order(){
 		try{
 		$data = array(
 			'o_status' => $this->input->post('o_status'),
@@ -153,7 +153,7 @@ class Welcome extends MY_CONTROLLER{
 			'c_id' => $this->input->post('c_id'),
 			);
 		
-		$query = $this->delivery_model->insert_into_order_table($data,$this->input->post('i_list'));
+		$query = $this->delivery_model->submit_order($data,$this->input->post('i_list'));
 
 		if($query){
 			$response = array(
@@ -173,9 +173,9 @@ class Welcome extends MY_CONTROLLER{
 
 	}
 
-public function get_corporates(){
+public function get_all_corporates(){
 	try {
-		  	$query = $this->delivery_model->get_corporate();
+		  	$query = $this->delivery_model->get_all_corporate();
 			$response = array(
 				'status'=>'ok',
 				'info'=>$query
@@ -184,6 +184,127 @@ public function get_corporates(){
 			$response = array('status'=>'failed', 'info'=>$e->__toString());
 		}
 		echo json_encode($response);
+}
+
+public function get_corporate_info_by_id(){
+	try{
+		$query = $this->delivery_model->get_corporate_info_by_id($this->input->get('id'));
+		$response = array(
+			'status'=>'ok',
+			'info'=>$query
+		);		  	
+		}catch (Exception $e){
+			$response = array('status'=>'failed', 'info'=>$e->__toString());
+		}
+		echo json_encode($response);
+}
+public function get_corporate_info_by_name(){
+	try{
+		$query = $this->delivery_model->get_corporate_info_by_name($this->input->get('name'));
+		$response = array(
+			'status'=>'ok',
+			'info'=>$query
+		);		  	
+		}catch (Exception $e){
+			$response = array('status'=>'failed', 'info'=>$e->__toString());
+		}
+		echo json_encode($response);
+}
+
+public function get_items_by_orderid(){
+	try{
+		$query = $this->delivery_model->get_items_by_orderid($this->input->get('id'));
+		$response = array(
+			'status'=>'ok',
+			'info'=>$query
+		);		  	
+		}catch (Exception $e){
+			$response = array('status'=>'failed', 'info'=>$e->__toString());
+		}
+		echo json_encode($response);
+}
+
+public function get_orders_by_corporateid(){
+	try{
+		$query = $this->delivery_model->get_orders_by_corporateid($this->input->get('id'));
+		$response = array(
+			'status'=>'ok',
+			'info'=>$query
+		);		  	
+		}catch (Exception $e){
+			$response = array('status'=>'failed', 'info'=>$e->__toString());
+		}
+		echo json_encode($response);
+}
+
+public function get_corporate_history(){
+	try{
+		$query = $this->delivery_model->get_corporate_history($this->input->get('id'));
+		$response = $query;
+		}catch (Exception $e){
+			$response = array('status'=>'failed', 'info'=>$e->__toString());
+		}
+		echo json_encode($query);
+}
+
+public function confirm_order(){
+	try{
+		$query = $this->delivery_model->confirm_order($this->input->get('id'));
+		$response = $query;
+		}catch (Exception $e){
+			$response = array('status'=>'failed', 'info'=>$e->__toString());
+		}
+		echo json_encode($query);
+}
+
+public function decline_order(){
+	try{
+		$query = $this->delivery_model->decline_order($this->input->get('id'));
+		$response = $query;
+		}catch (Exception $e){
+			$response = array('status'=>'failed', 'info'=>$e->__toString());
+		}
+		echo json_encode($query);
+}
+
+public function ship_order(){
+	try{
+		$query = $this->delivery_model->ship_order($this->input->get('id'));
+		$response = $query;
+		}catch (Exception $e){
+			$response = array('status'=>'failed', 'info'=>$e->__toString());
+		}
+		echo json_encode($query);
+}
+
+public function deliver_order(){
+	try{
+		$query = $this->delivery_model->deliver_order($this->input->get('id'));
+		$response = $query;
+		}catch (Exception $e){
+			$response = array('status'=>'failed', 'info'=>$e->__toString());
+		}
+		echo json_encode($query);
+}
+
+public function complete_order(){
+	try{
+		$query = $this->delivery_model->complete_order($this->input->get('id'));
+		$response = $query;
+		}catch (Exception $e){
+			$response = array('status'=>'failed', 'info'=>$e->__toString());
+		}
+		echo json_encode($query);
+}
+
+public function cancle_order(){
+	try{
+		$query = $this->delivery_model->cancle_order($this->input->get('id'));
+		$response = $query;
+		}catch (Exception $e){
+			$response = array('status'=>'failed', 'info'=>$e->__toString());
+		}
+		echo json_encode($query);
 }
 
 public function execute_sql_file(){
@@ -195,4 +316,35 @@ public function execute_sql_file(){
 	}
 }
 
+	// function _seed_corporate($limit){
+ //        // create a bunch of base buyer accounts
+ //        for ($i = 0; $i < $limit; $i++){
+ //            $data = array(
+ //                'c_name' => $this->faker->unique()->userName, // get a unique 
+ //                'c_status' => echo rand(0, 1),
+ //                'c_maxRent' => echo rand(3, 18),
+ //                'c_address' => $this->faker->streetAddress,
+ //            );
+ 
+ //            $query = $this->delivery_model->insert_into_corporate_table($data);
+ //        }
+ 
+ //        echo PHP_EOL;
+ //    }
+
+ //    function _seed_order($limit){
+ //        for ($i = 0; $i < $limit; $i++){
+ //            $data = array(
+ //                'o_status' => echo rand(0, 1),
+ //                'o_code' => echo rand(3, 18),
+ //                'o_count' => ,
+ //                'o_return_date' => ,
+	// 			'o_delivery_date' => ,
+	// 			'o_description' => ,
+ //                'c_id' => $this->faker->streetAddress,
+ //            );
+ //            $query = $this->delivery_model->submit_order($data,);
+ //        }
+ //        echo PHP_EOL;
+ //    }
 }
