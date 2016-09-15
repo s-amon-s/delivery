@@ -1,29 +1,16 @@
 ###################
-What is CodeIgniter
+Delivery TCDC
 ###################
 
-CodeIgniter is an Application Development Framework - a toolkit - for people
-who build web sites using PHP. Its goal is to enable you to develop projects
-much faster than you could if you were writing code from scratch, by providing
-a rich set of libraries for commonly needed tasks, as well as a simple
-interface and logical structure to access these libraries. CodeIgniter lets
-you creatively focus on your project by minimizing the amount of code needed
-for a given task.
+This repo is in the walk of the existing TCDC project.
+Its a further extension of the current TCDC project.
+It adds the item request options for corporate customers of TCDC
+Link to the TCDC Items : https://gist.github.com/rapee/ab1f0165d18eced78f55ed1893e0ea5f
 
 *******************
 Release Information
 *******************
-
-This repo contains in-development code for future releases. To download the
-latest stable release please visit the `CodeIgniter Downloads
-<http://www.codeigniter.com/download>`_ page.
-
-**************************
-Changelog and New Features
-**************************
-
-You can find a list of all changes for each release in the `user
-guide change log <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/changelog.rst>`_.
+This repo contains in-development code 
 
 *******************
 Server Requirements
@@ -38,32 +25,76 @@ issues, as well as missing features.
 ************
 Installation
 ************
+-  `Install CodeIgniter <http://www.codeigniter.com/user_guide/installation/index.html>`_
+-  `Clone The Repoistory `_
 
-Please see the `installation section <http://www.codeigniter.com/user_guide/installation/index.html>`_
-of the CodeIgniter User Guide.
+***********
+Copyright
+***********
+Boon Mee Lab 2016
 
-*******
-License
-*******
+***********************************************
+Resources (Functions and Parameters Reference)
+***********************************************
+//   $Canceled = 0;             Canceled
+//   $Waiting_Confirm = 1;      Submitted
+//   $Waiting_Ship = 2;         Confirmed 
+//   $Waiting_Delivery = 3;     Shipped 
+//   $Waiting_Return = 4;       Delivered
+//   $Completed = 5;            Returned
+//   $Waiting_Update = 6        Declined
 
-Please see the `license
-agreement <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/license.rst>`_.
+- `does_table_exist`
+	Input: 
+	Output: 
+- `does_database_exist`
+	Input: 
+	Output: 
+- `insert_into_corporate_table`
+	Input: 
+	Output: 
+- `submit_order`
+	Input: 
+	Output: 
+- `get_all_corporate`
+	Input: 
+	Output: 
+- `get_corporate_info_by_id`
+	Input: 
+	Output: 
+- `get_corporate_info_by_name`
+	Input: 
+	Output: 
+- `get_orders_by_corporateid`
+	Input: 
+	Output: 
+- `get_items_by_orderid`
+	Input: 
+	Output: 
+- `get_corporate_history`
+	Input: 
+	Output: 
+- `confirm_order`
+	Input: 
+	Output: 
+- `decline_order`
+	Input: 
+	Output: 
+- `ship_order`
+	Input: 
+	Output: 
+- `deliver_order`
+	Input: 
+	Output: 
+- `complete_order`
+	Input: 
+	Output: 
+- `cancle_order`
+	Input: 
+	Output: 
+- `update_order_table`
+	Input: 
+	Output: 
 
-*********
-Resources
-*********
 
--  `User Guide <http://www.codeigniter.com/docs>`_
--  `Language File Translations <https://github.com/bcit-ci/codeigniter3-translations>`_
--  `Community Forums <http://forum.codeigniter.com/>`_
--  `Community Wiki <https://github.com/bcit-ci/CodeIgniter/wiki>`_
--  `Community IRC <http://www.codeigniter.com/irc>`_
 
-Report security issues to our `Security Panel <mailto:security@codeigniter.com>`_, thank you.
-
-***************
-Acknowledgement
-***************
-
-The CodeIgniter team would like to thank EllisLab, all the
-contributors to the CodeIgniter project and you, the CodeIgniter user.
