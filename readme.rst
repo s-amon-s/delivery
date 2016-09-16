@@ -26,7 +26,7 @@ issues, as well as missing features.
 Installation
 ************
 -  `Install CodeIgniter <http://www.codeigniter.com/user_guide/installation/index.html>`_
--  `Clone The Repoistory `_
+-  `Clone The Repoistory`_
 
 ***********
 Copyright
@@ -67,9 +67,13 @@ Resources (Functions and Parameters Reference)
   - Input ->  *HTTP POST with following input parameters*:
 
   	-'c_name'          => containing corporate name data
+
     -'c_address'       => containing corporate address data
+
     -'contact_person'  => containing corporate contact person data
+
     -'c_phone'         => containing corporate phone data
+
     -'c_status'        => containing corporate status data
   - Output -> *Boolean result True if sucessfully inserted else False*::
 
