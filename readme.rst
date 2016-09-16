@@ -36,7 +36,8 @@ Boon Mee Lab 2016
 ***********************************************
 Resources (Functions and Parameters Reference)
 ***********************************************
-::
+* `Order Status values and its meaning`::
+
        $Canceled = 0;           aka  Canceled
        $Waiting_Confirm = 1;    aka  Submitted
        $Waiting_Ship = 2;       aka  Confirmed 
@@ -54,6 +55,7 @@ Resources (Functions and Parameters Reference)
        boolean = does_table_exist($tb_name);
 
 * `does_database_exist`:
+
   - Input ->  *Database Name*
   - Output -> *Boolean result True if exists else False*::
 
@@ -61,8 +63,10 @@ Resources (Functions and Parameters Reference)
        boolean = does_database_exist($tb_name);
 
 * `insert_into_corporate_table`:
+
   - Input ->  *HTTP POST with following input parameters*:
-    -'c_name'          => containing corporate name data
+
+  	-'c_name'          => containing corporate name data
     -'c_address'       => containing corporate address data
     -'contact_person'  => containing corporate contact person data
     -'c_phone'         => containing corporate phone data
@@ -74,16 +78,20 @@ Resources (Functions and Parameters Reference)
        input parameter are received using HTTP POST 
 
 * `set_max_day`:
+
   - Input ->  *HTTP POST id and number*:
+
     -'id'          => id of the corporate
-    -'number'      => number of days allowance 
+    -'number'      => number of days allowance
   - Output -> *Boolean result True if successfully executed else False*::
 
        Function for admin to set a corporate's max day for renting items
        boolean = does_database_exist($tb_name);
 
 * `set_max_rent`:
+
   - Input ->  *HTTP POST id and number*:
+
     -'id'          => id of the corporate
     -'number'      => number of items allowance 
   - Output -> *Boolean result True if successfully executed else False*::
@@ -92,7 +100,9 @@ Resources (Functions and Parameters Reference)
        boolean = does_database_exist($tb_name);
 
 * `submit_order`:
+
   - Input ->  *HTTP POST with following input parameters*:
+
     -'o_status'          => containing corporate name data
     -'o_code'       => containing corporate address data
     -'o_count'  => containing corporate contact person data
@@ -106,6 +116,7 @@ Resources (Functions and Parameters Reference)
        input parameter are received using HTTP POST 
 
 * `get_all_corporates`:
+
   - Input ->  *No Inputs*
   - Output -> *JSON array containing list of all the corporates and their info*::
 
@@ -113,20 +124,25 @@ Resources (Functions and Parameters Reference)
        Jsaon_Array = get_all_corporates();
 
 * `get_corporate_info_by_id`:
+
   - Input ->  *HTTP POST id*:
+
     -'id'          => id of the corporate
   - Output -> *JSON data of the corresponding corporate*::
 
        Function for admin to set a corporate's max day for renting items
        boolean = get_corporate_info_by_id();
+
 * `set_max_rent`
   - Input ->  *HTTP POST id*
+
     -'id'          => id of the corporate
     -'number'      => number of items allowance 
   - Output -> *Boolean result True if successfully executed else False*::
 
        Function for admin to set a corporate's max day for renting items
        boolean = does_database_exist($tb_name);
+
 * `set_max_rent`
   - Input ->  *HTTP POST id*
     -'id'          => id of the corporate
