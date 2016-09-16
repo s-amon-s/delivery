@@ -264,7 +264,7 @@ Resources (Functions and Parameters Reference)
        This function sets order_status to value 5 and stores the complete date into o_complete_date field. This is the last stage of the order cycle and means the items have been recieved back.
        boolean = complete_order();       
        
-- `cancle_order`
+* `cancle_order`
 
   - Input ->  *HTTP POST id*
 
