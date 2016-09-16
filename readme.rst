@@ -88,12 +88,13 @@ Resources (Functions and Parameters Reference)
        var c_name = $('#c_name').val();
 	   var c_address = $('#c_address').val();
 	   var c_status = $('#c_status').val();
-	   var c_maxRent = $('#c_maxRent').val();
+	   var c_contact_person = $('#c_contact_person').val();
+	   var c_phone = $('#c_phone').val();
 	 
 	   $.ajax({ 
 	     url: final_url,
 	     type:'post',
-	     data:{ c_name: c_name, c_address:c_address, c_status:c_status, c_maxRent:c_maxRent},
+	     data:{ c_name: c_name, c_address:c_address, c_status:c_status, c_contact_person:c_contact_person,c_phone:c_phone},
 	     success: function(resp){
 	     }
 	     }); 
@@ -124,15 +125,16 @@ Resources (Functions and Parameters Reference)
 
   - Input ->  *HTTP POST with following input parameters*:
 
-    -'o_status'          => containing corporate name data
-    -'o_code'       => containing corporate address data
-    -'o_count'  => containing corporate contact person data
-    -'o_description'         => containing corporate phone data
-    -'c_id'        => containing corporate status data
-    -'i_list'      => containing array of BIB_ID of items selected
+	    -'o_status'          => containing corporate name data
+	    -'o_code'       => containing corporate address data
+	    -'o_count'  => containing corporate contact person data
+	    -'o_description'         => containing corporate phone data
+	    -'c_id'        => containing corporate status data
+	    -'i_list'      => containing array of BIB_ID of items selected
   - Output -> *Boolean result True if sucessfully inserted else False*::
 
        Function to inset data into order and order_item table
+       AJAX call be made in the similar manner as insert_into_corporate_table
        boolean = submit_order();
        input parameter are received using HTTP POST 
 
