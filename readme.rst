@@ -130,35 +130,60 @@ Resources (Functions and Parameters Reference)
     -'id'          => id of the corporate
   - Output -> *JSON data of the corresponding corporate*::
 
-       Function for admin to set a corporate's max day for renting items
-       boolean = get_corporate_info_by_id();
+       Function for getting correcponding corporate info from input HTTP post id parameter
+       Json_Data = get_corporate_info_by_id();
 
-* `set_max_rent`
+* `get_corporate_info_by_name`:
+
+  - Input ->  *HTTP POST name*:
+
+    -'name'          => name of the corporate
+  - Output -> *JSON data of the corresponding corporate*::
+
+       Function for getting correcponding corporate info from input HTTP post name parameter
+       Json_Data = get_corporate_info_by_name();
+
+* `get_items_by_orderid`
+
+  - Input ->  *HTTP POST id*
+
+    -'id'          => id of the order
+  - Output -> *JSON ARRAY containing items*::
+
+       Function for getting items made in particular order
+       Json_Data = get_items_by_orderid();
+
+* `get_orders_by_corporateid`
+
   - Input ->  *HTTP POST id*
 
     -'id'          => id of the corporate
-    -'number'      => number of items allowance 
-  - Output -> *Boolean result True if successfully executed else False*::
+  - Output -> *JSON ARRAY containing orders made by corresponding corporate*::
 
-       Function for admin to set a corporate's max day for renting items
-       boolean = does_database_exist($tb_name);
+       Function for getting orders made by a corporate
+       Json_Data = get_orders_by_corporateid();
 
-* `set_max_rent`
+* `get_corporate_history`
+
   - Input ->  *HTTP POST id*
-    -'id'          => id of the corporate
-    -'number'      => number of items allowance 
-  - Output -> *Boolean result True if successfully executed else False*::
 
-       Function for admin to set a corporate's max day for renting items
-       boolean = does_database_exist($tb_name);
-* `set_max_rent`
+    -'id'          => id of the corporate
+  - Output -> *JSON ARRAY containing orderr and orders' items till date made by corresponding corporate*::
+
+       Function for getting corporate order history
+       Json_Object = get_orders_by_corporateid();
+       Count(Json_Object) will yield total orders made till date
+
+* `confirm_order`
+
   - Input ->  *HTTP POST id*
+
     -'id'          => id of the corporate
-    -'number'      => number of items allowance 
   - Output -> *Boolean result True if successfully executed else False*::
 
-       Function for admin to set a corporate's max day for renting items
-       boolean = does_database_exist($tb_name);
+
+       Function for admin to confirm a corporate's order
+       boolean = confirm_order();
 
 - `submit_order`
 	Input: 
