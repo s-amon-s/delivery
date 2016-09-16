@@ -68,13 +68,13 @@ Resources (Functions and Parameters Reference)
 
   	-'c_name'          => containing corporate name data
 
-    -'c_address'       => containing corporate address data
+    	-'c_address'       => containing corporate address data
 
-    -'contact_person'  => containing corporate contact person data
+    	-'contact_person'  => containing corporate contact person data
 
-    -'c_phone'         => containing corporate phone data
+    	-'c_phone'         => containing corporate phone data
 
-    -'c_status'        => containing corporate status data
+    	-'c_status'        => containing corporate status data
   - Output -> *Boolean result True if sucessfully inserted else False*::
 
        Function to inset data into corporate table
