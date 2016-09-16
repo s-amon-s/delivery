@@ -36,20 +36,56 @@ Boon Mee Lab 2016
 ***********************************************
 Resources (Functions and Parameters Reference)
 ***********************************************
-$Canceled = 0;             Canceled
-$Waiting_Confirm = 1;      Submitted
-$Waiting_Ship = 2;         Confirmed 
-$Waiting_Delivery = 3;     Shipped 
-$Waiting_Return = 4;       Delivered
-$Completed = 5;            Returned
-$Waiting_Update = 6        Declined
+$Canceled = 0;           aka  Canceled
+$Waiting_Confirm = 1;    aka  Submitted
+$Waiting_Ship = 2;       aka  Confirmed 
+$Waiting_Delivery = 3;   aka  Shipped 
+$Waiting_Return = 4;     aka  Delivered
+$Completed = 5;          aka  Returned
+$Waiting_Update = 6      aka  Declined
 
-- `does_table_exist`
-	Input: 
-	Output: 
-- `does_database_exist`
-	Input: 
-	Output: 
+* `does_table_exist`
+  - Input ->  *Table Name*
+  - Output -> *Boolean result True if exists else False*::
+
+       Function to check if a table exists
+       boolean = does_table_exist($tb_name);
+
+* `does_database_exist`
+  - Input ->  *Database Name*
+  - Output -> *Boolean result True if exists else False*::
+
+       Function to check if a database exists
+       boolean = does_database_exist($tb_name);
+
+* `insert_into_corporate_table`
+  - Input ->  *HTTP POST with following input parameters*
+    -'c_name'          => containing corporate name data
+    -'c_address'       => containing corporate address data
+    -'contact_person'  => containing corporate contact person data
+    -'c_phone'         => containing corporate phone data
+    -'c_status'        => containing corporate status data
+  - Output -> *Boolean result True if sucessfully inserted else False*::
+
+       Function to inset data into corporate table
+       boolean = insert_into_corporate_table();
+       input parameter are received using HTTP POST 
+
+* `set_max_day`
+  - Input ->  *HTTP POST *
+  - Output -> *Boolean result True if exists else False*::
+
+       Function to check if a database exists
+       boolean = does_database_exist($tb_name);
+
+* `does_database_exist`
+  - Input ->  *Database Name*
+  - Output -> *Boolean result True if exists else False*::
+
+       Function to check if a database exists
+       boolean = does_database_exist($tb_name);
+
+
 - `insert_into_corporate_table`
 	Input: 
 	Output: 

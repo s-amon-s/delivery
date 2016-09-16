@@ -115,8 +115,9 @@ class Welcome extends MY_CONTROLLER{
 			$data = array(
 				'c_name' => $this->input->post('c_name'),
 				'c_address'=>$this->input->post('c_address'),
+				'contact_person'=>$this->input->post('contact_person'),
+				'c_phone'=>$this->input->post('c_phone'),
 				'c_status' => $this->input->post('c_status'),
-				'c_maxRent' => $this->input->post('c_maxRent'),
 				);
 			
 			$query = $this->delivery_model->insert_into_corporate_table($data);
@@ -138,8 +139,25 @@ class Welcome extends MY_CONTROLLER{
 		echo(json_encode($response));
 	}
 	
-   
+	public function set_max_day(){
+		try{
+			$query = $this->delivery_model->set_max_day($this->input->post('id'),$this->input->post('number'));
+			$response = $query;
+			}catch (Exception $e){
+				$response = array('status'=>'failed', 'info'=>$e->__toString());
+			}
+			echo json_encode($query);
+}   
 
+	public function set_max_rent(){
+		try{
+			$query = $this->delivery_model->set_max_rent($this->input->post('id'),$this->input->post('number'));
+			$response = $query;
+			}catch (Exception $e){
+				$response = array('status'=>'failed', 'info'=>$e->__toString());
+			}
+			echo json_encode($query);
+} 
 
 	public function submit_order(){
 		try{
@@ -249,7 +267,7 @@ public function get_corporate_history(){
 
 public function confirm_order(){
 	try{
-		$query = $this->delivery_model->confirm_order($this->input->get('id'));
+		$query = $this->delivery_model->confirm_order($this->input->post('id'));
 		$response = $query;
 		}catch (Exception $e){
 			$response = array('status'=>'failed', 'info'=>$e->__toString());
@@ -259,7 +277,7 @@ public function confirm_order(){
 
 public function decline_order(){
 	try{
-		$query = $this->delivery_model->decline_order($this->input->get('id'));
+		$query = $this->delivery_model->decline_order($this->input->post('id'));
 		$response = $query;
 		}catch (Exception $e){
 			$response = array('status'=>'failed', 'info'=>$e->__toString());
@@ -269,7 +287,7 @@ public function decline_order(){
 
 public function ship_order(){
 	try{
-		$query = $this->delivery_model->ship_order($this->input->get('id'));
+		$query = $this->delivery_model->ship_order($this->input->post('id'));
 		$response = $query;
 		}catch (Exception $e){
 			$response = array('status'=>'failed', 'info'=>$e->__toString());
@@ -279,7 +297,7 @@ public function ship_order(){
 
 public function deliver_order(){
 	try{
-		$query = $this->delivery_model->deliver_order($this->input->get('id'));
+		$query = $this->delivery_model->deliver_order($this->input->post('id'));
 		$response = $query;
 		}catch (Exception $e){
 			$response = array('status'=>'failed', 'info'=>$e->__toString());
@@ -289,7 +307,7 @@ public function deliver_order(){
 
 public function complete_order(){
 	try{
-		$query = $this->delivery_model->complete_order($this->input->get('id'));
+		$query = $this->delivery_model->complete_order($this->input->post('id'));
 		$response = $query;
 		}catch (Exception $e){
 			$response = array('status'=>'failed', 'info'=>$e->__toString());
@@ -299,7 +317,7 @@ public function complete_order(){
 
 public function cancle_order(){
 	try{
-		$query = $this->delivery_model->cancle_order($this->input->get('id'));
+		$query = $this->delivery_model->cancle_order($this->input->post('id'));
 		$response = $query;
 		}catch (Exception $e){
 			$response = array('status'=>'failed', 'info'=>$e->__toString());

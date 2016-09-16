@@ -202,6 +202,7 @@ class Delivery_Model extends CI_Model{
 
 	public function cancle_order($order_id){
 		  // Cancle order code ??
+		 // Set max day ??
 		  $this->db->where('id', $order_id);
   		  $query = $this->db ->delete('Orders');
 		  return $query;
@@ -213,6 +214,20 @@ class Delivery_Model extends CI_Model{
 		$this->db->replace('table', $data);
 		// $sql = "SELECT c_name FROM Corporate WHERE username = ? AND password = ? "; 
 		// $query = $this->db->query($sql, array($user,$pass));
+	}
+
+	public function set_max_day($corporate_id,$number){
+		$data=array('c_maxDay'=>$number);
+		$this->db->where('id',$corporate_id);
+		$query = $this->db->update('Corporate',$data);
+		return $query;
+	}
+
+	public function set_max_rent($corporate_id,$number){
+		$data=array('c_maxRent'=>$number);
+		$this->db->where('id',$corporate_id);
+		$query = $this->db->update('Corporate',$data);
+		return $query;
 	}
 
 	public function delete_db($database_name){
