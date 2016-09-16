@@ -165,8 +165,6 @@ class Welcome extends MY_CONTROLLER{
 			'o_status' => $this->input->post('o_status'),
 			'o_code'=>$this->input->post('o_code'),
 			'o_count' => $this->input->post('o_count'),
-			'o_return_date' => $this->input->post('o_return_date'),
-			'o_delivery_date' => $this->input->post('o_delivery_date'),
 			'o_description' => $this->input->post('o_description'),
 			'c_id' => $this->input->post('c_id'),
 			);
