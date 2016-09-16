@@ -75,7 +75,24 @@ Resources (Functions and Parameters Reference)
 
        Function to inset data into corporate table
        boolean = insert_into_corporate_table();
-       input parameter are received using HTTP POST 
+       input parameter are received using HTTP POST
+
+       `Example Post Method Using AJAX`
+       
+       var final_url = 'http://' + '<?=base_url();?>' + 'index.php/Welcome/' + 'insert_into_corporate_table';
+
+       var c_name = $('#c_name').val();
+	   var c_address = $('#c_address').val();
+	   var c_status = $('#c_status').val();
+	   var c_maxRent = $('#c_maxRent').val();
+	 
+	   $.ajax({ 
+	     url: final_url,
+	     type:'post',
+	     data:{ c_name: c_name, c_address:c_address, c_status:c_status, c_maxRent:c_maxRent},
+	     success: function(resp){
+	     }
+	     }); 
 
 * `set_max_day`:
 
@@ -183,50 +200,80 @@ Resources (Functions and Parameters Reference)
 
 
        Function for admin to confirm a corporate's order
+       This function sets order_status to value 2 and stores the confirm date into o_confirm_date field
        boolean = confirm_order();
 
-- `submit_order`
-	Input: 
-	Output: 
-- `get_all_corporate`
-	Input: 
-	Output: 
-- `get_corporate_info_by_id`
-	Input: 
-	Output: 
-- `get_corporate_info_by_name`
-	Input: 
-	Output: 
-- `get_orders_by_corporateid`
-	Input: 
-	Output: 
-- `get_items_by_orderid`
-	Input: 
-	Output: 
-- `get_corporate_history`
-	Input: 
-	Output: 
-- `confirm_order`
-	Input: 
-	Output: 
-- `decline_order`
-	Input: 
-	Output: 
-- `ship_order`
-	Input: 
-	Output: 
-- `deliver_order`
-	Input: 
-	Output: 
-- `complete_order`
-	Input: 
-	Output: 
-- `cancle_order`
-	Input: 
-	Output: 
+
+* `decline_order`
+
+  - Input ->  *HTTP POST id*
+
+    -'id'          => id of the corporate
+  - Output -> *Boolean result True if successfully executed else False*::
+
+
+       Function for admin to decline a corporate's order
+       This function sets order_status to value 6 and stores the decline date into o_decline_date field
+       boolean = decline_order();
+
+
+* `ship_order`
+
+  - Input ->  *HTTP POST id*
+
+    -'id'          => id of the corporate
+  - Output -> *Boolean result True if successfully executed else False*::
+
+
+       Function for admin to ship a corporate's order
+       This function sets order_status to value 3 and stores the ship date into o_ship_date field
+       boolean = ship_order();       
+
+* `deliver_order`
+
+  - Input ->  *HTTP POST id*
+
+    -'id'          => id of the corporate
+  - Output -> *Boolean result True if successfully executed else False*::
+
+
+       Function for admin to deliver a corporate's order
+       This function sets order_status to value 4 and stores the deliver date into o_deliver_date field
+       boolean = deliver_order(); 
+
+* `complete_order`
+
+  - Input ->  *HTTP POST id*
+
+    -'id'          => id of the corporate
+  - Output -> *Boolean result True if successfully executed else False*::
+
+
+       Function for admin to complete a corporate's order
+       This function sets order_status to value 5 and stores the complete date into o_complete_date field. This is the last stage of the order cycle and means the items have been recieved back.
+       boolean = complete_order();       
+       
+* `cancle_order`
+
+  - Input ->  *HTTP POST id*
+
+    -'id'          => id of the corporate
+  - Output -> *Boolean result True if successfully executed else False*::
+
+
+       Function for admin to cancles a corporate's order
+       This function sets order_status to value 0 and stores the cancle date into o_cancle_date field.
+       This resets the order. Means order is no more available. Hence new request must be made.
+       boolean = cancle_order(); 
+
+
 - `update_order_table`
 	Input: 
 	Output: 
 
+*********************
+Mock Data for Tables
+*********************
 
-
+Orders.sql Corporate.sql and Orders_Items.sql files can be found under application/models folder
+These file can be imported into database manually or run a script to execute each line dynamically.
