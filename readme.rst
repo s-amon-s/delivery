@@ -46,6 +46,7 @@ Resources (Functions and Parameters Reference)
        $Waiting_Update = 6      aka  Declined
 
 * `does_table_exist`:
+
   - Input ->  *Table Name*
   - Output -> *Boolean result True if exists else False*::
 
