@@ -125,12 +125,17 @@ Resources (Functions and Parameters Reference)
 
   - Input ->  *HTTP POST with following input parameters*:
 
-	    -'o_status'          => containing corporate name data
-	    -'o_code'       => containing corporate address data
-	    -'o_count'  => containing corporate contact person data
-	    -'o_description'         => containing corporate phone data
-	    -'c_id'        => containing corporate status data
-	    -'i_list'      => containing array of BIB_ID of items selected
+		-'o_status'       => containing corporate name data
+
+		-'o_code'         => containing corporate address data
+
+		-'o_count'        => containing corporate contact person data
+
+		-'o_description'  => containing corporate phone data
+
+		-'c_id'           => containing corporate status data
+
+		-'i_list'         => containing array of BIB_ID of items selected
   - Output -> *Boolean result True if sucessfully inserted else False*::
 
        Function to inset data into order and order_item table
